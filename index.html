@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stimulus Tabs Controller</title>
+    <style>
+      .c-tab__content {
+        display: none;
+      }
+      .c-tab__content.is-active {
+        display: block;
+      }
+
+      .fade-enter,
+      .fade-leave {
+        transition: all 1s ease;
+      }
+
+      .fade-enter-start,
+      .fade-leave-end {
+        opacity: 0;
+      }
+    </style>
+    <script type="module">
+      import { Application } from 'stimulus'
+      import Tabs from './src/main'
+
+      const application = Application.start()
+      application.register('tabs', Tabs)
+    </script>
+  </head>
+  <body>
+    <h1>Here, only one tab can be opened:</h1>
+    <div
+      data-controller="tabs"
+      data-tabs-active-class="is-active"
+      data-tabs-multiple-value="true"
+      data-tabs-always-value="false"
+      data-tabs-transition-value="fade"
+    >
+      <button data-action="tabs#trigger" data-id="one">Toggle 1</button>
+      <button data-action="tabs#trigger" data-id="two" >Toggle 2</button>
+      <div data-tabs-target="content" data-id="one" class="c-tab__content is-active">Content 1</div>
+      <div data-tabs-target="content" data-id="two" class="c-tab__content">Content 2</div>
+    </div>
+  
+    <h1>Here, only one tab can be opened:</h1>
+    <div
+      data-controller="tabs"
+      data-tabs-multiple-value="false"
+      data-tabs-always-value="true"
+      data-tabs-duration-value="200"
+      data-tabs-transition-value="fade"
+    >
+      <button data-action="tabs#trigger" data-id="1">Toggle 1</button>
+      <button data-action="tabs#trigger" data-id="2" >Toggle 2</button>
+      <button data-action="tabs#trigger" data-id="3" >Toggle 3</button>
+      <button data-action="tabs#trigger" data-id="4" >Toggle 4</button>
+      <button data-action="tabs#trigger" data-id="5" >Toggle 5</button>
+      <div data-tabs-target="content" data-id="1" class="c-tab__content is-active">Content 1</div>
+      <div data-tabs-target="content" data-id="2" class="c-tab__content is-active">Content 2</div>
+      <div data-tabs-target="content" data-id="3" class="c-tab__content is-active">Content 3</div>
+      <div data-tabs-target="content" data-id="4" class="c-tab__content">Content 4</div>
+      <div data-tabs-target="content" data-id="5" class="c-tab__content">Content 5</div>
+    </div>
+  </body>
+</html>
